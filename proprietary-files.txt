@@ -1,3 +1,4 @@
+framework/qti-telephony-common.jar
 # ADSP
 lib/libsdsprpc_system.so
 lib64/libsdsprpc_system.so
