@@ -97,10 +97,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
-# FUSE
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.fuse_sdcard=true
-
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.enable_hwc_vds=1 \
@@ -154,11 +150,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Misc
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
-    persist.vendor.qcomsysd.enabled=1 \
-    ro.additionalbutton.operation=0 \
-    ro.am.reschedule_service=true \
-    ro.sys.fw.use_trim_settings=true \
-    sys.autosuspend.timeout=500000
+    persist.vendor.qcomsysd.enabled=1
 
 # Netflix
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -173,10 +165,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.nfc_nci=pn8x \
     ro.nfc.port=I2C
-
-# NTP Server
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.backup.ntpServer="0.pool.ntp.org"
 
 # QCOM cabl
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -232,18 +220,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sdm.debug.disable_skip_validate=1 \
     vendor.display.disable_skip_validate=1
 
-# Shutdown
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.vendor.shutdown.waittime=500
-
 # System prop for UBWC
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.video.disable.ubwc=1
-
-# Tap to Wake
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.asus.dclick=1 \
-    persist.asus.gesture.type=1000000
 
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
