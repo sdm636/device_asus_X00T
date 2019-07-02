@@ -1,5 +1,5 @@
 # Device Tree for Asus Zenfone Max Pro M1
-The Asus Zenfone Max Pro M1 (codenamed _"ASUS_X00TD"_) is mid-range smartphone from Asus.
+The Asus Zenfone Max Pro M1 (codenamed _"ASUS_X00T"_) is mid-range smartphone from Asus.
 Asus Zenfone Max Pro M1 was announced in April 2018 and released in May 2018.
 
 ## Device specifications
