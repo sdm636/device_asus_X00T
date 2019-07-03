@@ -1,4 +1,3 @@
-framework/qti-telephony-common.jar
 # ADSP
 lib/libsdsprpc_system.so
 lib64/libsdsprpc_system.so
@@ -91,6 +90,15 @@ vendor/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
 vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
 vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 vendor/etc/acdbdata/MTP/MTP_workspaceFile.qwsp
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_Codec_cal.acdb
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_Speaker_cal.acdb
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_Hdmi_cal.acdb
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_Headset_cal.acdb
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_General_cal.acdb
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_workspaceFile.qwsp
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_Global_cal.acdb
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_Bluetooth_cal.acdb
+vendor/etc/acdbdata/MTP/sdm660-tavil-snd-card/MTP_WCD9340_Handset_cal.acdb
 vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
 vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
 vendor/etc/acdbdata/QRD/QRD_Global_cal.acdb
@@ -99,6 +107,30 @@ vendor/etc/acdbdata/QRD/QRD_Hdmi_cal.acdb
 vendor/etc/acdbdata/QRD/QRD_Headset_cal.acdb
 vendor/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
 vendor/etc/acdbdata/QRD/QRD_workspaceFile.qwsp
+vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Headset_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Bluetooth_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Hdmi_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Handset_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_General_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_workspaceFile.qwsp
+vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Global_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-tasha-skus-snd-card/QRD_SKUS_Speaker_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-snd-card-skush/QRD_SKUSH_Bluetooth_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-snd-card-skush/QRD_SKUSH_Speaker_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-snd-card-skush/QRD_SKUSH_Global_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-snd-card-skush/QRD_SKUSH_General_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-snd-card-skush/QRD_SKUSH_Handset_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-snd-card-skush/QRD_SKUSH_Headset_cal.acdb
+vendor/etc/acdbdata/QRD/sdm660-snd-card-skush/QRD_SKUSH_workspaceFile.qwsp
+vendor/etc/acdbdata/QRD/sdm660-snd-card-skush/QRD_SKUSH_Hdmi_cal.acdb
+vendor/etc/acdbdata/QRD/NonCE/QRD_NonCE_Bluetooth_cal.acdb
+vendor/etc/acdbdata/QRD/NonCE/QRD_NonCE_Global_cal.acdb
+vendor/etc/acdbdata/QRD/NonCE/QRD_NonCE_General_cal.acdb
+vendor/etc/acdbdata/QRD/NonCE/QRD_NonCE_Hdmi_cal.acdb
+vendor/etc/acdbdata/QRD/NonCE/QRD_NonCE_Speaker_cal.acdb
+vendor/etc/acdbdata/QRD/NonCE/QRD_NonCE_workspaceFile.qwsp
+vendor/etc/acdbdata/QRD/NonCE/QRD_NonCE_Headset_cal.acdb
+vendor/etc/acdbdata/QRD/NonCE/QRD_NonCE_Handset_cal.acdb
 vendor/etc/acdbdata/adsp_avs_config.acdb
 
 # Bluetooth - from lavender - PPR1.180904.001 V10.2.3.0.PFGCNXM
@@ -771,6 +803,12 @@ vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti
 vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
 vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 
+# Dirac - from Xiaomi
+vendor/lib/soundfx/libdirac.so|f63826a905b520fa524e4c1b147be7cf65240953
+vendor/lib/libDiracAPI_SHARED.so|42b49679d38eca93fead05ea06ddbdc8108fd4b1
+vendor/etc/diracmobile.config|d781cd6798a7481a8f7128d144abfb2b8794212d
+vendor/etc/diracvdd.bin
+
 # Display calibration
 vendor/etc/qdcm_calib_data_nt36672_1080p_video_mode_dsi_panel.xml
 vendor/etc/qdcm_calib_data_nt36672_1080p_video_mode_dsi_txd_panel.xml
@@ -1360,11 +1398,14 @@ etc/wfdconfigsink.xml
 lib/com.qualcomm.qti.wifidisplayhal@1.0.so
 lib/extractors/libmmparser.so
 lib/libFileMux.so
+lib/libaacwrapper.so
+lib/libdisplayconfig.so
 lib/libmmparser_lite.so
 lib/libmmosal.so
 lib/libmmrtpdecoder.so
 lib/libmmrtpencoder.so
 lib/libOmxMux.so
+lib/libqdMetaData.system.so
 lib/libwfdavenhancements.so
 lib/libwfdclient.so
 lib/libwfdcodecv4l2.so
@@ -1383,9 +1424,12 @@ lib/libwfduibcsinkinterface.so
 lib/libwfduibcsrc.so
 lib/libwfduibcsrcinterface.so
 lib64/extractors/libmmparser.so
+lib64/libaacwrapper.so
+lib64/libdisplayconfig.so
 lib64/libFileMux.so
 lib64/libmmosal.so
 lib64/libmmparser_lite.so
+lib64/libqdMetaData.system.so
 lib64/libwfdclient.so
 lib64/libwfdnative.so
 lib64/libwfds.so
