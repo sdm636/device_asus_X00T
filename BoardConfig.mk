@@ -180,9 +180,6 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
-# Lineage Hardware
-JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(DEVICE_PATH)/lineagehw|**/*.java
-
 # Media
 TARGET_USES_MEDIA_EXTENSIONS := true
 
@@ -213,7 +210,7 @@ TARGET_PER_MGR_ENABLED := true
 
 # Power
 TARGET_USES_INTERACTION_BOOST := true
-TARGET_TAP_TO_WAKE_NODE := "/sys/kernel/touchpanel/dclicknode"
+TARGET_TAP_TO_WAKE_NODE := "/proc/tpd_gesture"
 
 # Properties
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
