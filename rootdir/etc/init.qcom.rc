@@ -386,6 +386,9 @@ on post-fs-data
     mkdir /data/vendor/location 0770 gps gps
     mkdir /data/vendor/location/mq 0770 gps gps
     mkdir /data/vendor/location/xtwifi 0770 gps gps
+    mkdir /data/vendor/location/gpsone_d 0770 system gps
+    mkdir /data/vendor/location/quipc 0770 gps system
+    mkdir /data/vendor/location/gsiff 0770 gps gps
     mkdir /dev/socket/location 0770 gps gps
     mkdir /dev/socket/location/mq 0770 gps gps
     mkdir /dev/socket/location/xtra 0770 gps gps
@@ -394,6 +397,14 @@ on post-fs-data
     mkdir /data/vendor/location-partner/ppe 0770 gps gps
     mkdir /dev/socket/location 0770 gps gps
     mkdir /dev/socket/location/ehub 0770 gps gps
+
+    # migrating the GNSS hal to vendor requires this to be relabeled; the
+    # directory itself is created by /vendor/bin/xtra-daemon
+    chown gps gps /data/vendor/location/xtra
+    chmod 0750 /data/vendor/location/xtra
+    chown gps gps /data/vendor/location/xtra/socket_hal_xtra
+    chmod 0660 /data/vendor/location/xtra/socket_hal_xtra
+    chown gps gps /data/vendor/location/xtra/xtra.sqlite    
 
 # Permissions for Touch dclick Mode
     chown system system /sys/kernel/touchpanel/dclicknode
@@ -905,7 +916,7 @@ service ssgtzd /vendor/bin/ssgtzd
 service loc_launcher /vendor/bin/loc_launcher
     class late_start
     user gps
-    group gps
+    group gps inet diag wifi
 
 on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
