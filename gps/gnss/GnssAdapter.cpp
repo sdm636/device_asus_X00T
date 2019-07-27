@@ -766,9 +766,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                     err = mApi.setGpsLock(mConfig.gpsLock);
                 }
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_SUPL_VERSION_VALID_BIT) {
                 uint32_t newSuplVersion = mAdapter.convertSuplVersion(mConfig.suplVersion);
@@ -780,9 +779,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                     err = LOCATION_ERROR_SUCCESS;
                 }
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_SET_ASSISTANCE_DATA_VALID_BIT) {
                 if (GNSS_ASSISTANCE_TYPE_SUPL == mConfig.assistanceServer.type) {
@@ -810,9 +808,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                     err = LOCATION_ERROR_INVALID_PARAMETER;
                 }
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_LPP_PROFILE_VALID_BIT) {
                 uint32_t newLppProfile = mAdapter.convertLppProfile(mConfig.lppProfile);
@@ -824,9 +821,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                     err = LOCATION_ERROR_SUCCESS;
                 }
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_LPPE_CONTROL_PLANE_VALID_BIT) {
                 uint32_t newLppeControlPlaneMask =
@@ -838,9 +834,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                     err = LOCATION_ERROR_SUCCESS;
                 }
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_LPPE_USER_PLANE_VALID_BIT) {
                 uint32_t newLppeUserPlaneMask =
@@ -852,9 +847,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                     err = LOCATION_ERROR_SUCCESS;
                 }
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_AGLONASS_POSITION_PROTOCOL_VALID_BIT) {
                 uint32_t newAGloProtMask =
@@ -867,9 +861,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                     err = LOCATION_ERROR_SUCCESS;
                 }
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_EM_PDN_FOR_EM_SUPL_VALID_BIT) {
                 uint32_t newEP4ES = mAdapter.convertEP4ES(mConfig.emergencyPdnForEmergencySupl);
@@ -878,9 +871,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                 }
                 err = LOCATION_ERROR_SUCCESS;
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_SUPL_EM_SERVICES_BIT) {
                 uint32_t newSuplEs = mAdapter.convertSuplEs(mConfig.suplEmergencyServices);
@@ -889,9 +881,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                 }
                 err = LOCATION_ERROR_SUCCESS;
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
             if (mConfig.flags & GNSS_CONFIG_FLAGS_SUPL_MODE_BIT) {
                 uint32_t newSuplMode = mAdapter.convertSuplMode(mConfig.suplModeMask);
@@ -903,9 +894,8 @@ GnssAdapter::gnssUpdateConfigCommand(GnssConfig config)
                 }
                 err = LOCATION_ERROR_SUCCESS;
                 if (index < mCount) {
-                    errs[index] = err;
+                    errs[index++] = err;
                 }
-                index++;
             }
 
             mAdapter.reportResponse(index, errs, mIds);
@@ -1967,6 +1957,7 @@ GnssAdapter::enableCommand(LocationTechnologyType techType)
             } else if (powerVoteId > 0) {
                 err = LOCATION_ERROR_ALREADY_STARTED;
             } else {
+                mContext.modemPowerVote(true);
                 mAdapter.setPowerVoteId(mSessionId);
                 mApi.setGpsLock(GNSS_CONFIG_GPS_LOCK_NONE);
                 mAdapter.mXtraObserver.updateLockStatus(
@@ -1978,7 +1969,6 @@ GnssAdapter::enableCommand(LocationTechnologyType techType)
 
     if (mContext != NULL) {
         sendMsg(new MsgEnableGnss(*this, *mLocApi, *mContext, sessionId, techType));
-        mContext->modemPowerVote(true);
     } else {
         LOC_LOGE("%s]: Context is NULL", __func__);
     }
@@ -2011,6 +2001,7 @@ GnssAdapter::disableCommand(uint32_t id)
             if (powerVoteId != mSessionId) {
                 err = LOCATION_ERROR_ID_UNKNOWN;
             } else {
+                mContext.modemPowerVote(false);
                 mAdapter.setPowerVoteId(0);
                 mApi.setGpsLock(mAdapter.convertGpsLock(ContextBase::mGps_conf.GPS_LOCK));
                 mAdapter.mXtraObserver.updateLockStatus(
@@ -2022,7 +2013,6 @@ GnssAdapter::disableCommand(uint32_t id)
 
     if (mContext != NULL) {
         sendMsg(new MsgDisableGnss(*this, *mLocApi, *mContext, id));
-        mContext->modemPowerVote(false);
     }
 
 }
@@ -2080,7 +2070,25 @@ GnssAdapter::needReport(const UlpLocation& ulpLocation,
                         enum loc_sess_status status,
                         LocPosTechMask techMask) {
     bool reported = false;
-    reported = LocApiBase::needReport(ulpLocation, status, techMask);
+    if (LOC_SESS_SUCCESS == status) {
+        // this is a final fix
+        LocPosTechMask mask =
+                LOC_POS_TECH_MASK_SATELLITE | LOC_POS_TECH_MASK_SENSORS | LOC_POS_TECH_MASK_HYBRID;
+        // it is a Satellite fix or a sensor fix
+        reported = (mask & techMask);
+    } else if (LOC_SESS_INTERMEDIATE == status &&
+            LOC_SESS_INTERMEDIATE == ContextBase::mGps_conf.INTERMEDIATE_POS) {
+        // this is a intermediate fix and we accepte intermediate
+
+        // it is NOT the case that
+        // there is inaccuracy; and
+        // we care about inaccuracy; and
+        // the inaccuracy exceeds our tolerance
+        reported = !((ulpLocation.gpsLocation.flags & LOC_GPS_LOCATION_HAS_ACCURACY) &&
+                (ContextBase::mGps_conf.ACCURACY_THRES != 0) &&
+                (ulpLocation.gpsLocation.accuracy > ContextBase::mGps_conf.ACCURACY_THRES));
+    }
+
     return reported;
 }
 
@@ -2911,8 +2919,6 @@ void GnssAdapter::dataConnOpenCommand(
             LOC_LOGV("AgpsMsgAtlOpenSuccess");
             if (mApnName == nullptr) {
                 LOC_LOGE("%s] new allocation failed, fatal error.", __func__);
-                // Reporting the failure here
-                mAgpsManager->reportAtlClosed(mAgpsType);
                 return;
             }
             memcpy(mApnName, apnName, apnLen);
@@ -2929,16 +2935,9 @@ void GnssAdapter::dataConnOpenCommand(
             mAgpsManager->reportAtlOpenSuccess(mAgpsType, mApnName, mApnLen, mBearerType);
         }
     };
-    // Added inital length checks for apnlen check to avoid security issues
-    // In case of failure reporting the same
-    if (NULL == apnName || apnLen <= 0 || apnLen > MAX_APN_LEN ||
-            (strlen(apnName) != (unsigned)apnLen)) {
-        LOC_LOGe("%s]: incorrect apnlen length or incorrect apnName", __func__);
-        mAgpsManager.reportAtlClosed(agpsType);
-    } else {
-        sendMsg( new AgpsMsgAtlOpenSuccess(
-                    &mAgpsManager, agpsType, apnName, apnLen, bearerType));
-    }
+
+    sendMsg( new AgpsMsgAtlOpenSuccess(
+            &mAgpsManager, agpsType, apnName, apnLen, bearerType));
 }
 
 void GnssAdapter::dataConnClosedCommand(AGpsExtType agpsType){
