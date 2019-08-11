@@ -38,7 +38,7 @@
     <string name="gesture_down_title">Gesture Swipe Down</string>
     <string name="gesture_left_title">Gesture Swipe Left</string>
     <string name="gesture_right_title">Gesture Swipe Right</string>
-    <string name="LineageActions">LineageActions</string>
+    <string name="LineageActions">ZenActions</string>
     <string name="LineageActions_summary">Gestures and Tweaks for Zenfone</string>
     <string name="screen_off_gestures">Screen-off gestures</string>
     <string name="gestures">Gestures</string>
